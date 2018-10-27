@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="customer.tcrj.com.zsproject">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_MEDIA_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!-- 必选 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 获取网络状态 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 网络通信 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 获取设备信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 获取MAC地址 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 读写sdcard，storage等等 -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
+
+    <application
+        android:name=".MyApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/newlogin"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/newlogin"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar1"
+        tools:replace="android:icon, android:theme">
+
+        <meta-data
+            android:name="PGYER_APPID"
+            android:value="e25e7c1ac97151fde0dfdc50e51c8235" />
+
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".first.CPinfoActivity" />
+        <activity android:name=".first.CPinfoSxActivity" />
+        <activity android:name=".first.AddCPinfoActivity" />
+        <activity android:name=".first.ListActivity" />
+        <activity android:name=".first.ZScodeActivity" />
+        <activity android:name=".first.IconActivity" />
+        <activity android:name=".first.dwinfoActivity" />
+        <activity android:name=".first.XminfoActivity" />
+        <activity android:name=".first.XmListActivity" />
+        <activity android:name=".first.XmIconActivity" />
+        <activity android:name=".first.CPListInfoActivity"/>
+        <activity android:name=".first.DwjcListInfoActivity"/>
+        <activity android:name=".first.DwjcAddCPinfoActivity"/>
+        <activity android:name=".first.XmUpdateZSActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/myTransparent"
+            />
+        <activity
+            android:name=".first.UpdateZSActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/myTransparent" />
+        <activity android:name=".first.PhototViewActivity"
+            />
+        <activity android:name=".first.XmPhototViewActivity"
+            />
+    </application>
+
+</manifest>

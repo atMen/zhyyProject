@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer-array name="xm_typeid">
+        <item>-1</item>
+        <item>1</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+    </integer-array>
+
+    <string-array name="xm_type">
+        <item>请选择</item>
+        <item>售前</item>
+        <item>需求</item>
+        <item>设计</item>
+        <item>开发</item>
+        <item>测试</item>
+        <item>实施</item>
+        <item>待验收</item>
+        <item>已验收</item>
+        <item>暂不维护</item>
+        <item>不维护</item>
+    </string-array>
+
+
+</resources>

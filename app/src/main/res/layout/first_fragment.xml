@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_f6"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/blue"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="首页"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:textSize="@dimen/font_size_18"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="延安新区智慧运营系统"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/font_size_18"
+            android:textColor="@color/white"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/content"
+            android:id="@+id/name"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户名："
+            android:gravity="center_horizontal"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:background="@drawable/sy_btn_select"
+            android:id="@+id/ll_cpxx"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_marginRight="5dp"
+            >
+
+            <ImageView
+                android:visibility="gone"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/ty02_03"
+                />
+
+            <TextView
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:textColor="#111111"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-condensed"
+                android:lineSpacingExtra="8dp"
+                android:text="点位基础"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@drawable/sy_btn_select"
+            android:id="@+id/ll_cxlc"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <ImageView
+                android:visibility="gone"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/ty02_03"
+                />
+
+            <TextView
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-condensed"
+                android:lineSpacingExtra="8dp"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:textColor="#111111"
+                android:textSize="16sp"
+                android:text="项目信息"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:background="@drawable/sy_btn_select"
+            android:id="@+id/ll_zsmsq"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_marginRight="5dp"
+            >
+
+            <ImageView
+                android:visibility="gone"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/ty02_03"
+                />
+
+            <TextView
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:textColor="#111111"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-condensed"
+                android:lineSpacingExtra="8dp"
+                android:text="点位信息"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="invisible"
+            android:background="@drawable/sy_btn_select"
+            android:id="@+id/ll_spjg"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <ImageView
+                android:visibility="gone"
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/ty02_03"
+                />
+
+            <TextView
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-condensed"
+                android:lineSpacingExtra="8dp"
+                android:gravity="center"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="55dp"
+                android:textColor="#111111"
+                android:textSize="16sp"
+                android:text="点位信息"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</LinearLayout>
