@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_video_player"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <include layout="@layout/title"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_videobg_icon"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        >
+
+
+
+        <customer.tcrj.com.zsproject.Media.MyVideoView
+            android:id="@+id/vv_view"
+            android:layout_width="match_parent"
+            android:layout_height="450dp"
+            android:layout_centerInParent="true" />
+
+        <ImageView
+            android:id="@+id/iv_video_screenshot"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/iv_play_video"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/video_03"
+             />
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_upload"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="上传视频"
+        android:background="@drawable/bg_btn_background"
+        android:textColor="@color/white"
+        />
+
+</LinearLayout>

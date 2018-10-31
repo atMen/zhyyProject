@@ -117,10 +117,10 @@ public class DwjcListInfoActivity extends BaseActivity {
 
     SpotBasisInfo dwinfo;
     private void setCpInfo(SpotBasisInfo cpinfo) {
-        SpotBasisInfo.ResultBean result = cpinfo.getResult();
-        SpotBasisInfo.ResultBean.SpottingBean spotting = cpinfo.getResult().getSpotting();
+        SpotBasisInfo.ResultBean.ModelBean result = cpinfo.getResult().getModel();
+        SpotBasisInfo.ResultBean.ModelBean.SpottingBean spotting = result.getSpotting();
         if(spotting != null){
-            SpotBasisInfo.ResultBean.SpottingBean.ProjectInfoBean projectInfo = spotting.getProjectInfo();
+            SpotBasisInfo.ResultBean.ModelBean.SpottingBean.ProjectInfoBean projectInfo = spotting.getProjectInfo();
             cpname.setText("项目名称：" + projectInfo.getPName());
             tv01.setText(spotting.getSpotName());
         }
@@ -129,7 +129,7 @@ public class DwjcListInfoActivity extends BaseActivity {
         if (result != null) {
 
             //TODO:服务器返回基础分类名称
-            tv02.setText(result.getBasisClass()+"");
+            tv02.setText(dwinfo.getResult().getClassname());
             tv03.setText(result.getBasisCode());
             tv04.setText(result.getBasisLocation());
             tv06.setText(result.getRemark());

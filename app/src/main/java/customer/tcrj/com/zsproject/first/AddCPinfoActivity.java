@@ -1,11 +1,8 @@
 package customer.tcrj.com.zsproject.first;
 
-import android.Manifest;
+
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,12 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.luck.picture.lib.PictureSelector;
-import com.luck.picture.lib.config.PictureConfig;
-import com.luck.picture.lib.config.PictureMimeType;
-import com.luck.picture.lib.entity.LocalMedia;
-import com.luck.picture.lib.permissions.RxPermissions;
-import com.luck.picture.lib.tools.PictureFileUtils;
+
 import com.tsy.sdk.myokhttp.MyOkHttp;
 import com.tsy.sdk.myokhttp.response.GsonResponseHandler;
 
@@ -28,20 +20,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
-import java.util.List;
+
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import customer.tcrj.com.zsproject.MainActivity;
+
 import customer.tcrj.com.zsproject.MyApp;
 import customer.tcrj.com.zsproject.R;
 import customer.tcrj.com.zsproject.Utils.ACache;
 import customer.tcrj.com.zsproject.adapter.GridImageAdapter;
 import customer.tcrj.com.zsproject.base.BaseActivity;
 import customer.tcrj.com.zsproject.bean.LoginInfo;
+import customer.tcrj.com.zsproject.bean.SpotBasisInfo;
 import customer.tcrj.com.zsproject.bean.bean;
+
 import customer.tcrj.com.zsproject.bean.dwInfo;
 import customer.tcrj.com.zsproject.bean.proListInfo;
 import customer.tcrj.com.zsproject.net.ApiConstants;
@@ -107,10 +101,10 @@ public class AddCPinfoActivity extends BaseActivity {
         dwinfo = (dwInfo) getIntent().getSerializableExtra("dwinfo");
         SpotClassName = getIntent().getStringExtra("SpotClassName");
 
-        dwInfo.ResultBean result = dwinfo.getResult();
-        dwInfo.ResultBean.ProjectInfoBean projectInfo = result.getProjectInfo();
+        dwInfo.ResultBean.ModelBean result = dwinfo.getResult().getModel();
+        dwInfo.ResultBean.ModelBean.ProjectInfoBean projectInfo = result.getProjectInfo();
         tv_work_naturejob.setText(projectInfo.getPName());
-        tv_dwfl.setText(SpotClassName);
+        tv_dwfl.setText(dwinfo.getResult().getClassname());
         edt_work_overtime.setText(result.getSpotName());
         edt_cpbcggdw.setText(result.getSpotCode());
         edt_cpbzq.setText(result.getSpotSchedule()+"");
@@ -201,7 +195,7 @@ public class AddCPinfoActivity extends BaseActivity {
         JSONObject jsonObject = new JSONObject();
 
         try {
-            dwInfo.ResultBean result = dwinfo.getResult();
+            dwInfo.ResultBean.ModelBean result = dwinfo.getResult().getModel();
 
             jsonObject.put("ID", result.getID());
             jsonObject.put("SpotCode", edt_cpbcggdw.getText().toString());

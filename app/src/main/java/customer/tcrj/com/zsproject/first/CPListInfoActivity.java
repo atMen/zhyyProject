@@ -39,8 +39,7 @@ public class CPListInfoActivity extends BaseActivity {
 
     @BindView(R.id.tv06)
     TextView tv06;
-    @BindView(R.id.num)
-    TextView num;
+
 
     @BindView(R.id.txtTitle)
     TextView txtTitle;
@@ -67,8 +66,8 @@ public class CPListInfoActivity extends BaseActivity {
 
     @Override
     protected void setData() {
-        num.setVisibility(View.VISIBLE);
-        num.setText("编辑");
+//        num.setVisibility(View.VISIBLE);
+//        num.setText("编辑");
         getData(proID);
 
     }
@@ -109,8 +108,8 @@ public class CPListInfoActivity extends BaseActivity {
     dwInfo dwinfo;
     private void setCpInfo(dwInfo cpinfo) {
 
-        dwInfo.ResultBean.ProjectInfoBean result = cpinfo.getResult().getProjectInfo();
-        dwInfo.ResultBean result1 = cpinfo.getResult();
+        dwInfo.ResultBean.ModelBean.ProjectInfoBean result = cpinfo.getResult().getModel().getProjectInfo();
+        dwInfo.ResultBean.ModelBean result1 = cpinfo.getResult().getModel();
         if(result != null){
             cpname.setText("项目名称：" + result.getPName());
         }
@@ -118,15 +117,15 @@ public class CPListInfoActivity extends BaseActivity {
         if (result1 != null) {
             int state = result1.getState();
             if(state == 1){
-                cptime.setText("状态：未开始");
+                cptime.setText("未开始");
             }else if(state == 2){
-                cptime.setText("状态：施工中");
+                cptime.setText("施工中");
             }else {
-                cptime.setText("状态：已完成");
+                cptime.setText("已完成");
             }
 
             tv01.setText(result1.getSpotName());
-            tv02.setText(SpotClassName);
+            tv02.setText(cpinfo.getResult().getClassname());
             tv03.setText(result1.getSpotCode()+"");
             tv04.setText(result1.getSpotSchedule()+" %");
             tv06.setText(result1.getRemark());
@@ -134,7 +133,7 @@ public class CPListInfoActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.btnback, R.id.num})
+    @OnClick({R.id.btnback, R.id.num,R.id.btn_edit,R.id.btn_icon})
     public void onClick(View v) {
         switch (v.getId()){
 
@@ -144,10 +143,23 @@ public class CPListInfoActivity extends BaseActivity {
                 break;
 
             case R.id.num:
+//                Bundle bundle = new Bundle();
+//                bundle.putSerializable("dwinfo",dwinfo);
+//                bundle.putString("SpotClassName",SpotClassName);
+//                toClass(CPListInfoActivity.this,AddCPinfoActivity.class,bundle,CPREQUESTCODE);//产品信息录入
+                break;
+
+            case R.id.btn_edit:
+
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("dwinfo",dwinfo);
                 bundle.putString("SpotClassName",SpotClassName);
                 toClass(CPListInfoActivity.this,AddCPinfoActivity.class,bundle,CPREQUESTCODE);//产品信息录入
+                break;
+            case R.id.btn_icon:
+                Bundle bundle1 = new Bundle();
+                bundle1.putString("ProID",proID+"");
+                toClass(this,ListActivity.class,bundle1);
                 break;
 
             default:

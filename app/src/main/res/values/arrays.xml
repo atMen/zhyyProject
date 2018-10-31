@@ -29,5 +29,15 @@
         <item>不维护</item>
     </string-array>
 
+    <string-array name="tp_sp_type">
+        <item>图片</item>
+        <item>视频</item>
+
+    </string-array>
+
+    <integer-array name="tp_sp_typeid">
+        <item>1</item>
+        <item>2</item>
+    </integer-array>
 
 </resources>

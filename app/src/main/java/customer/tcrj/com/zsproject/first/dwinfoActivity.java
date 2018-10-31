@@ -351,9 +351,7 @@ public class dwinfoActivity extends BaseActivity implements BaseQuickAdapter.OnI
     //获取网络数据
     private void getData(final int num,String s) {
 
-
         JSONObject jsonObject = new JSONObject();
-
         try {
             jsonObject.put("pageIndex", num+"");
 

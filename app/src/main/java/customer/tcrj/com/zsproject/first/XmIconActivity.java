@@ -11,7 +11,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,22 +35,28 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import customer.tcrj.com.zsproject.Media.VideoRecorderActivity;
 import customer.tcrj.com.zsproject.MyApp;
 import customer.tcrj.com.zsproject.R;
 import customer.tcrj.com.zsproject.Utils.ACache;
 import customer.tcrj.com.zsproject.Utils.Utils;
+import customer.tcrj.com.zsproject.adapter.SpinnerTypeAdapter;
 import customer.tcrj.com.zsproject.adapter.ldjhAdapter;
 import customer.tcrj.com.zsproject.base.BaseActivity;
 import customer.tcrj.com.zsproject.bean.LoginInfo;
 import customer.tcrj.com.zsproject.bean.bean;
 import customer.tcrj.com.zsproject.bean.iconInfo;
+import customer.tcrj.com.zsproject.bean.projectInfo;
 import customer.tcrj.com.zsproject.net.ApiConstants;
 import customer.tcrj.com.zsproject.widget.CustomLoadMoreView;
+import customer.tcrj.com.zsproject.widget.selectDialog;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+
+import static customer.tcrj.com.zsproject.R.id.edt_search_result;
 
 
 public class XmIconActivity extends BaseActivity implements BaseQuickAdapter.OnItemClickListener {
@@ -59,7 +67,8 @@ public class XmIconActivity extends BaseActivity implements BaseQuickAdapter.OnI
     RecyclerView mRecyclerView;
     @BindView(R.id.mPtrFrameLayout)
     PtrFrameLayout mPtrFrameLayout;
-
+    @BindView(R.id.subordinate_type)
+    Spinner subordinate_type;
     @BindView(R.id.btnback)
     ImageView btnback;
     @BindView(R.id.txtTitle)
@@ -77,10 +86,50 @@ public class XmIconActivity extends BaseActivity implements BaseQuickAdapter.OnI
     private String id;
     private String MenuName;
     LoginInfo.ResultBean data;
-
+    private List<projectInfo.ResultBean> resultType;
     @Override
     protected int setLayout() {
         return R.layout.activity_cpinfo;
+    }
+
+    private void SpinnerLoad() {
+        resultType = new ArrayList<>();
+        CharSequence[] dates = this.getResources().getStringArray(R.array.tp_sp_type);
+        int[] intArray = this.getResources().getIntArray(R.array.tp_sp_typeid);
+        for (int i = 0; i < dates.length; i++) {
+            projectInfo.ResultBean dateentity = new projectInfo.ResultBean();
+            dateentity.setID(intArray[i]);
+            dateentity.setName(dates[i].toString());
+            resultType.add(dateentity);
+        }
+        setdate_Spinner_type(resultType);
+    }
+
+    private int DayType = -1;
+    SpinnerTypeAdapter Dadapter1;
+
+    public void setdate_Spinner_type(List<projectInfo.ResultBean> r_Spinner) {
+
+        Dadapter1 = new SpinnerTypeAdapter(this);
+        Dadapter1.setData(r_Spinner);
+        subordinate_type.setAdapter(Dadapter1);
+
+        subordinate_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                projectInfo.ResultBean entity = (projectInfo.ResultBean) Dadapter1.getItem(position);
+                DayType = entity.getID();
+
+                pageNum = 1;
+                getData(pageNum);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
@@ -91,6 +140,7 @@ public class XmIconActivity extends BaseActivity implements BaseQuickAdapter.OnI
         ProID = getIntent().getStringExtra("ProID");
         MenuName = getIntent().getStringExtra("MenuName");
         initview();
+        SpinnerLoad();
         // 清空图片缓存，包括裁剪、压缩后的图片 注意:必须要在上传完成后调用 必须要获取权限
         RxPermissions permissions = new RxPermissions(this);
         permissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Observer<Boolean>() {
@@ -120,7 +170,7 @@ public class XmIconActivity extends BaseActivity implements BaseQuickAdapter.OnI
 
     private void initview() {
         num.setVisibility(View.VISIBLE);
-        num.setText("添加图片");
+        num.setText("添加");
         txtTitle.setText(MenuName);
 
         mPtrFrameLayout.disableWhenHorizontalMove(true);
@@ -288,7 +338,7 @@ public class XmIconActivity extends BaseActivity implements BaseQuickAdapter.OnI
 
     @Override
     protected void setData() {
-        getData(1);
+//        getData(1);
     }
 
     @OnClick({R.id.btnback,R.id.num})
@@ -298,7 +348,8 @@ public class XmIconActivity extends BaseActivity implements BaseQuickAdapter.OnI
                 finish();
                 break;
             case R.id.num:
-                addIcon();
+                //显示dialog选择图片还是视频
+                showSelectDialog();
                 break;
             default:
                 break;
@@ -483,7 +534,6 @@ public class XmIconActivity extends BaseActivity implements BaseQuickAdapter.OnI
                 });
     }
 
-
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
@@ -495,8 +545,46 @@ public class XmIconActivity extends BaseActivity implements BaseQuickAdapter.OnI
 
     }
 
+    selectDialog dialog;
+    private void showSelectDialog() {
+
+        selectDialog.Builder builder = new selectDialog.Builder(this);
+        dialog = builder
+                .style(R.style.Dialog)
+                .cancelTouchout(false)
+                .view(R.layout.dialog_select)
+                .cancelTouchout(true)
+                .addViewOnclick(R.id.pictrue,listener)
+                .addViewOnclick(R.id.video,listener)
+                .build();
+        dialog.show();
 
 
+    }
 
+    View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            dialog.dismiss();
+            switch (view.getId()){
+                case R.id.pictrue :
+//                    Toast.makeText(mContext, "图片", Toast.LENGTH_SHORT).show();
+                    addIcon();
+                    break;
+                case R.id.video:
+//                    Toast.makeText(mContext, "视频", Toast.LENGTH_SHORT).show();
+                    //视频录制
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("mlid",id+"");
+                    bundle.putString("ProID",ProID);
+                    toClass(XmIconActivity.this,VideoRecorderActivity.class,bundle);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
 }

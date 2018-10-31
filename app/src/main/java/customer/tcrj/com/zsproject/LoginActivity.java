@@ -1,5 +1,6 @@
 package customer.tcrj.com.zsproject;
 
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -61,7 +62,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     protected void setData() {
-
+//        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
     }
 
     @OnClick({R.id.btn_login})
@@ -77,8 +78,9 @@ public class LoginActivity extends BaseActivity {
                 }else {
                     toLogin(username,etpsw);
                 }
+                break;
 
-
+            default:
                 break;
 
         }
@@ -89,10 +91,6 @@ public class LoginActivity extends BaseActivity {
         showLoadingDialog("正在登录...");
 
         JSONObject jsonObject = new JSONObject();
-
-        Log.e("TAG","username:"+user+"---psw:"+psw);
-
-
         try {
             jsonObject.put("AccountNo", user);
             jsonObject.put("pwd", psw);
@@ -138,9 +136,8 @@ public class LoginActivity extends BaseActivity {
 
 
     //缓存数据
-    private void ToCache(LoginInfo.ResultBean data ){
+    private void ToCache(LoginInfo.ResultBean data){
         ACache.get(this).put("userinfo",data);
     }
-
 
 }

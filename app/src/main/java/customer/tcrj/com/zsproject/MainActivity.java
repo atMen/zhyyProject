@@ -153,6 +153,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 }
                 break;
 
+            default:
+                break;
+
         }
         transaction.commit();
     }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/nim_popup_menu_item_selector"
+    android:minHeight="44dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="25dp" >
+
+    <TextView
+        android:id="@+id/popup_menu_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/arcgisselector"
+        />
+
+    <TextView
+        android:id="@+id/popup_menu_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/popup_menu_icon"
+        android:ellipsize="end"
+        android:text="@string/app_name"
+        android:singleLine="true"
+        android:textColor="#000000"
+        android:textSize="17sp" />
+
+</RelativeLayout>

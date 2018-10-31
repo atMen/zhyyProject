@@ -28,9 +28,7 @@ import customer.tcrj.com.zsproject.base.BaseActivity;
 import customer.tcrj.com.zsproject.bean.LoginInfo;
 import customer.tcrj.com.zsproject.bean.SpotBasisInfo;
 import customer.tcrj.com.zsproject.bean.bean;
-import customer.tcrj.com.zsproject.bean.dwInfo;
 import customer.tcrj.com.zsproject.net.ApiConstants;
-import customer.tcrj.com.zsproject.widget.DialogLeaveApply;
 import customer.tcrj.com.zsproject.widget.DialogSpotClass;
 
 public class DwjcAddCPinfoActivity extends BaseActivity {
@@ -99,10 +97,10 @@ public class DwjcAddCPinfoActivity extends BaseActivity {
         dwinfo = (SpotBasisInfo) getIntent().getSerializableExtra("dwinfo");
         SpotClassName = getIntent().getStringExtra("SpotClassName");
 
-        SpotBasisInfo.ResultBean result = dwinfo.getResult();
+        SpotBasisInfo.ResultBean.ModelBean result = dwinfo.getResult().getModel();
 
-        SpotBasisInfo.ResultBean.SpottingBean SpottingInfo = result.getSpotting();
-        SpotBasisInfo.ResultBean.SpottingBean.ProjectInfoBean projectInfo = SpottingInfo.getProjectInfo();
+        SpotBasisInfo.ResultBean.ModelBean.SpottingBean SpottingInfo = result.getSpotting();
+        SpotBasisInfo.ResultBean.ModelBean.SpottingBean.ProjectInfoBean projectInfo = SpottingInfo.getProjectInfo();
 
         tv_work_naturejob.setText(projectInfo.getPName());
         tv_dwfl.setText(SpottingInfo.getSpotName());//点位名称
@@ -118,7 +116,7 @@ public class DwjcAddCPinfoActivity extends BaseActivity {
         edt_shijichicun.setText(result.getActualSize());
         edt_shijifangl.setText(result.getActualCubage());
 
-        tv_state.setText(result.getBasisClass()+"");//基础分类
+        tv_state.setText(dwinfo.getResult().getClassname());//基础分类
     }
 
 
@@ -171,7 +169,7 @@ public class DwjcAddCPinfoActivity extends BaseActivity {
         JSONObject jsonObject = new JSONObject();
 
         try {
-            SpotBasisInfo.ResultBean result = dwinfo.getResult();
+            SpotBasisInfo.ResultBean.ModelBean result = dwinfo.getResult().getModel();
 
             jsonObject.put("ID", result.getID());
 

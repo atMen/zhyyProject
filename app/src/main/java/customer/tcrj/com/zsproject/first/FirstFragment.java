@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,10 @@ public class FirstFragment extends BaseFragment {
     TextView name;
     @BindView(R.id.content)
     TextView content;
+    @BindView(R.id.iv_setting)
+    ImageView iv_setting;
+    @BindView(R.id.rl_arcgis)
+    RelativeLayout rl_arcgis;
 
 
     LoginInfo.ResultBean data;
@@ -53,7 +58,6 @@ public class FirstFragment extends BaseFragment {
 //      StatusBarUtil.setTranslucentForImageView(getActivity(),20,icon);
         data = (LoginInfo.ResultBean) ACache.get(mContext).getAsObject("userinfo");
         name.setText("用户名："+data.getName());
-
 
         PackageManager um = mContext.getPackageManager();
         PackageInfo pi = null;
@@ -72,13 +76,15 @@ public class FirstFragment extends BaseFragment {
 
     }
 
-    @OnClick({R.id.ll_cpxx,R.id.ll_cxlc,R.id.ll_zsmsq,R.id.ll_spjg})
+    @OnClick({R.id.ll_cpxx,R.id.ll_cxlc,R.id.ll_zsmsq,R.id.ll_spjg,R.id.iv_setting,R.id.rl_arcgis})
     public void onClick(View v) {
         switch (v.getId()){
+            case R.id.iv_setting:
+                toClass(mContext,SettingActivity.class);//个人中心
+                break;
 
             case R.id.ll_cpxx:
                 toClass(mContext,CPinfoSxActivity.class);//点位基础
-
                 break;
 
             case R.id.ll_cxlc:
@@ -93,6 +99,10 @@ public class FirstFragment extends BaseFragment {
 
             case R.id.ll_spjg:
 
+                break;
+            case R.id.rl_arcgis:
+
+                toClass(mContext,ArcGisActivity.class);//Gis地图显示
                 break;
 
             default:

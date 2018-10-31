@@ -11,9 +11,9 @@
     <include layout="@layout/title"/>
 
     <customer.tcrj.com.zsproject.widget.SuperScrollView
-        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:padding="10dp"
@@ -22,6 +22,7 @@
             android:layout_height="match_parent">
 
             <RelativeLayout
+                android:paddingBottom="10dp"
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
@@ -37,25 +38,6 @@
 
             </RelativeLayout>
 
-            <TextView
-                android:layout_marginTop="3dp"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                android:id="@+id/cptime"
-                android:textSize="14sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="状态："
-                />
-            <View
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:id="@+id/dotted_line"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@drawable/bg_dotted_line"
-                android:layerType="software"
-                />
 
             <LinearLayout
                 android:paddingBottom="10dp"
@@ -153,6 +135,32 @@
 
 
             </LinearLayout>
+
+            <LinearLayout
+                android:paddingBottom="10dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/font_size_16"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="点位状态："
+                    />
+
+                <TextView
+                    android:id="@+id/cptime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/font_size_16"
+                    android:text=""
+                    />
+
+
+            </LinearLayout>
+
             <LinearLayout
                 android:paddingBottom="5dp"
                 android:orientation="horizontal"
@@ -200,5 +208,38 @@
         </LinearLayout>
 
     </customer.tcrj.com.zsproject.widget.SuperScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_edit"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="0.7"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/bg_btn_background"
+            android:text="信息编辑"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_16" />
+
+        <Button
+            android:id="@+id/btn_icon"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_weight="0.7"
+            android:background="@drawable/bg_btn_background"
+            android:text="图片目录"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_size_16" />
+
+
+    </LinearLayout>
 
 </LinearLayout>

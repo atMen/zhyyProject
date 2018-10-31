@@ -46,17 +46,17 @@ public class dwxxAdapter extends BaseQuickAdapter<dwxxInfo.ResultBean.ItemsBean,
         int currentState = item.getState();
 
         if(currentState == 1){
-            helper.setText(R.id.icon_num, "状态：未开始");
+            helper.setText(R.id.icon_num, "点位状态：未开始");
             return;
         }
 
         if(currentState == 2){
-            helper.setText(R.id.icon_num, "状态：施工中");
+            helper.setText(R.id.icon_num, "点位状态：施工中");
             return;
         }
 
         if(currentState == 3){
-            helper.setText(R.id.icon_num, "状态：已完成");
+            helper.setText(R.id.icon_num, "点位状态：已完成");
             return;
         }
 

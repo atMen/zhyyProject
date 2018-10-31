@@ -394,53 +394,66 @@ public class CPinfoSxActivity extends BaseActivity implements BaseQuickAdapter.O
 
     public void setdate_Spinner_type(List<projectInfo.ResultBean> r_Spinner) {
 
-        Dadapter1 = new SpinnerTypeAdapter(this);
-        Dadapter1.setData(r_Spinner);
-        subordinate_type.setAdapter(Dadapter1);
 
-        subordinate_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                projectInfo.ResultBean entity = (projectInfo.ResultBean) Dadapter1.getItem(position);
-                DayType = entity.getID();
-                if(position != 0){
-                    pageNum = 1;
-                    String s = edt_search_result.getText().toString();
-                    getData(pageNum,s);
+
+        if(subordinate_project != null){
+
+            Dadapter1 = new SpinnerTypeAdapter(this);
+            Dadapter1.setData(r_Spinner);
+            subordinate_type.setAdapter(Dadapter1);
+
+            subordinate_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    projectInfo.ResultBean entity = (projectInfo.ResultBean) Dadapter1.getItem(position);
+                    DayType = entity.getID();
+                    if(position != 0){
+                        pageNum = 1;
+                        String s = edt_search_result.getText().toString();
+                        getData(pageNum,s);
+                    }
                 }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
+                }
+            });
+        }
+
     }
     public void setdate_Spinner(List<projectInfo.ResultBean> r_Spinner) {
 
-        Dadapter = new SpinnerDateAdapter(this);
-        Dadapter.setData(r_Spinner);
-        subordinate_project.setAdapter(Dadapter);
 
-        subordinate_project.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                projectInfo.ResultBean entity = (projectInfo.ResultBean) Dadapter.getItem(position);
-                projectId = entity.getID();
+        if(subordinate_project != null){
 
-                if(position != 0){
-                    pageNum = 1;
-                    String s = edt_search_result.getText().toString();
-                    getData(pageNum,s);
+
+            Dadapter = new SpinnerDateAdapter(this);
+            Dadapter.setData(r_Spinner);
+
+            subordinate_project.setAdapter(Dadapter);
+
+            subordinate_project.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    projectInfo.ResultBean entity = (projectInfo.ResultBean) Dadapter.getItem(position);
+                    projectId = entity.getID();
+
+                    if(position != 0){
+                        pageNum = 1;
+                        String s = edt_search_result.getText().toString();
+                        getData(pageNum,s);
+                    }
+
                 }
 
-            }
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+        }
 
-            }
-        });
     }
 
 }

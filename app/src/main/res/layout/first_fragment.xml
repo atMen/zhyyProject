@@ -6,6 +6,7 @@
     >
 
     <RelativeLayout
+        android:id="@+id/rl_arcgis"
         android:layout_width="match_parent"
         android:layout_height="200dp">
 
@@ -16,12 +17,24 @@
             android:background="@color/blue"
             />
 
+
+        <ImageView
+            android:id="@+id/iv_setting"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:background="@drawable/setting"
+            />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="首页"
             android:gravity="center_horizontal"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="35dp"
             android:textSize="@dimen/font_size_18"
             android:textColor="@color/white"
             />

@@ -137,14 +137,13 @@ public class UpdateZSActivity extends Activity implements View.OnClickListener {
         showLoadingDialog("正在创建目录...");
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("SpotBasisID", ProID);
+            jsonObject.put("SpotID", ProID);
             if(bean != null){
                 jsonObject.put("ID", bean.getID());
                 jsonObject.put("MenuCode", bm);
             }else {
                 jsonObject.put("MenuCode", three);
             }
-
 
             jsonObject.put("MenuName", three);
             jsonObject.put("Sort", xh);

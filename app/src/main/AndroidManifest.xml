@@ -19,6 +19,7 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
 
 
+
     <application
         android:name=".MyApp"
         android:allowBackup="true"
@@ -28,7 +29,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar1"
         tools:replace="android:icon, android:theme">
-
         <meta-data
             android:name="PGYER_APPID"
             android:value="e25e7c1ac97151fde0dfdc50e51c8235" />
@@ -40,34 +40,75 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".first.CPinfoActivity" />
-        <activity android:name=".first.CPinfoSxActivity" />
-        <activity android:name=".first.AddCPinfoActivity" />
-        <activity android:name=".first.ListActivity" />
-        <activity android:name=".first.ZScodeActivity" />
-        <activity android:name=".first.IconActivity" />
-        <activity android:name=".first.dwinfoActivity" />
-        <activity android:name=".first.XminfoActivity" />
-        <activity android:name=".first.XmListActivity" />
-        <activity android:name=".first.XmIconActivity" />
-        <activity android:name=".first.CPListInfoActivity"/>
-        <activity android:name=".first.DwjcListInfoActivity"/>
-        <activity android:name=".first.DwjcAddCPinfoActivity"/>
-        <activity android:name=".first.XmUpdateZSActivity"
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".first.CPinfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".first.CPinfoSxActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".first.AddCPinfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".first.ListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".first.ZScodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".first.IconActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".first.dwinfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".first.XminfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".first.XmListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".first.XmIconActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".first.CPListInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".first.DwjcListInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".first.DwjcAddCPinfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".first.XmUpdateZSActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
-            android:theme="@style/myTransparent"
-            />
+            android:theme="@style/myTransparent" />
         <activity
             android:name=".first.UpdateZSActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/myTransparent" />
-        <activity android:name=".first.PhototViewActivity"
-            />
-        <activity android:name=".first.XmPhototViewActivity"
-            />
+        <activity
+            android:name=".first.PhototViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".first.XmPhototViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".first.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".first.ArcGisActivity"
+            android:screenOrientation="landscape"
+            ></activity>
+
+        <activity android:name=".Media.VideoPlayerActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Media.VideoRecorderActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -2,10 +2,10 @@ ext {
     cfgs = [
             compileSdkVersion    : 26,
             buildToolsVersion    : "25.0.2",
-            minSdkVersion        : 14,
+            minSdkVersion        : 15,
             targetSdkVersion     : 22,
-            versionCode          : 7,
-            versionName          : "1.0.3",
+            versionCode          : 8,
+            versionName          : "1.0.4",
             ucropVersionCode     : 22,
             ucropVersionName     : "2.2.0-native",
 
