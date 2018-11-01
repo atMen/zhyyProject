@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.esri.android.map.MapView;
@@ -31,6 +32,8 @@ public class ArcGisActivity extends BaseActivity implements OnStatusChangedListe
     MapView mapView;
     @BindView(R.id.btn_tcgl)
     Button btn_tcgl;
+    @BindView(R.id.btnback)
+    ImageView btnback;
 
     private ArrayList<PopupItem> menuItemList;
     private ExtendPopupWindow popupMenu;
@@ -51,7 +54,7 @@ public class ArcGisActivity extends BaseActivity implements OnStatusChangedListe
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);// 设置全屏
+        WindowManager.LayoutParams.FLAG_FULLSCREEN);//设置全屏
 
         return R.layout.activity_arc_gis;
     }
@@ -63,7 +66,7 @@ public class ArcGisActivity extends BaseActivity implements OnStatusChangedListe
     @Override
     protected void setData() {
 
-        showLoadingDialog("正在加载数据...");
+        showLoadingDialog("正在加载图层...");
         dynaLayer1 = new ArcGISDynamicMapServiceLayer(ApiConstants.ARCGIS_URL_DT);
         dynaLayer2 = new ArcGISDynamicMapServiceLayer(ApiConstants.ARCGIS_URL_YAXQZHDL);
         dynaLayer3 = new ArcGISDynamicMapServiceLayer(ApiConstants.ARCGIS_URL_CZWXLGJBZ);
@@ -80,22 +83,30 @@ public class ArcGisActivity extends BaseActivity implements OnStatusChangedListe
         mapView.addLayer(dynaLayer6, 5);
         mapView.addLayer(dynaLayer7, 6);
 
-        mapView.setAllowRotationByPinch(true);
-//        mapView.setOnStatusChangedListener(this);
+//        mapView.setAllowRotationByPinch(true);
+        mapView.setOnStatusChangedListener(this);
 //        mapView.setRotationAngle(90);
 //        mapView.centerAndZoom();
 
     }
 
 
-    @OnClick({R.id.btn_tcgl})
+    private boolean enabled = false;
+    @OnClick({R.id.btn_tcgl,R.id.btnback})
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_tcgl:
 
-                initPopuptWindow(ArcGisActivity.this,btn_tcgl);
-                break;
+                if(enabled){
+                    initPopuptWindow(ArcGisActivity.this,btn_tcgl);
+                }else {
+                    T("图层初始化未完成，不可进行此操作");
+                }
 
+                break;
+            case R.id.btnback:
+                finish();
+                break;
             default:
                 break;
         }
@@ -202,7 +213,9 @@ public class ArcGisActivity extends BaseActivity implements OnStatusChangedListe
 
     @Override
     public void onStatusChanged(Object o, STATUS status) {
+
         if (status.equals(STATUS.INITIALIZED)) { //初始化完成才显示，防止黑屏
+            enabled = true;
             mapView.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -212,5 +225,17 @@ public class ArcGisActivity extends BaseActivity implements OnStatusChangedListe
             }, 100);
 
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mapView.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.unpause();
     }
 }

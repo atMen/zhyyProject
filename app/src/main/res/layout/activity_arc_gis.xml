@@ -14,6 +14,17 @@
         android:background="@color/white"
         android:clickable="true" />
 
+    <ImageView
+        android:layout_margin="10dp"
+        android:id="@+id/btnback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:padding="10dip"
+        android:src="@drawable/back_icon"
+        android:background="@drawable/bg_arc_background"
+        />
+
     <Button
         android:layout_margin="10dp"
         android:id="@+id/btn_tcgl"

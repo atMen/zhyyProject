@@ -52,6 +52,16 @@ public class iconInfo implements Serializable{
         private int ID;
         private String FileUrl;
 
+        public String getFileType() {
+            return FileType;
+        }
+
+        public void setFileType(String fileType) {
+            FileType = fileType;
+        }
+
+        private String FileType;
+
         public int getID() {
             return ID;
         }

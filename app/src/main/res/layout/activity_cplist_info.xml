@@ -235,7 +235,7 @@
             android:layout_marginRight="5dp"
             android:layout_weight="0.7"
             android:background="@drawable/bg_btn_background"
-            android:text="图片目录"
+            android:text="附件目录"
             android:textColor="@color/white"
             android:textSize="@dimen/font_size_16" />
 

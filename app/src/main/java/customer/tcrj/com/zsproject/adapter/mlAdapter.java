@@ -25,11 +25,18 @@ import customer.tcrj.com.zsproject.bean.proListInfo;
 public class mlAdapter extends BaseQuickAdapter<MlListInfo.ResultBean, BaseViewHolder> {
     public static final int LAST_POSITION = -1;
     private Context mContext;
+    private boolean type = false;
 
 
     public mlAdapter(@Nullable List<MlListInfo.ResultBean> data, Context context) {
         super(R.layout.item_list, data);
         this.mContext = context;
+    }
+
+    public mlAdapter(@Nullable List<MlListInfo.ResultBean> data, Context context,boolean type) {
+        super(R.layout.item_list, data);
+        this.mContext = context;
+        this.type = type;
     }
 
     @Override
@@ -38,6 +45,7 @@ public class mlAdapter extends BaseQuickAdapter<MlListInfo.ResultBean, BaseViewH
         helper.setText(R.id.tv_listname, item.getMenuName());
 
         TextView view = (TextView) helper.getView(R.id.tv_dele);
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,6 +65,11 @@ public class mlAdapter extends BaseQuickAdapter<MlListInfo.ResultBean, BaseViewH
             }
         });
 
+
+        if(type){
+            view.setVisibility(View.GONE);
+            editview.setVisibility(View.GONE);
+        }
 
     }
 

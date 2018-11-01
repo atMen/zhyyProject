@@ -27,6 +27,9 @@ import com.luck.picture.lib.tools.PictureFileUtils;
 import com.tsy.sdk.myokhttp.MyOkHttp;
 import com.tsy.sdk.myokhttp.response.GsonResponseHandler;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,15 +42,18 @@ import customer.tcrj.com.zsproject.Media.VideoRecorderActivity;
 import customer.tcrj.com.zsproject.MyApp;
 import customer.tcrj.com.zsproject.R;
 import customer.tcrj.com.zsproject.Utils.ACache;
+import customer.tcrj.com.zsproject.Utils.DownLoadFile;
 import customer.tcrj.com.zsproject.Utils.Utils;
 import customer.tcrj.com.zsproject.adapter.SpinnerTypeAdapter;
 import customer.tcrj.com.zsproject.adapter.ldjhAdapter;
 import customer.tcrj.com.zsproject.base.BaseActivity;
 import customer.tcrj.com.zsproject.bean.LoginInfo;
+import customer.tcrj.com.zsproject.bean.MessageEvent;
 import customer.tcrj.com.zsproject.bean.bean;
 import customer.tcrj.com.zsproject.bean.iconInfo;
 import customer.tcrj.com.zsproject.bean.projectInfo;
 import customer.tcrj.com.zsproject.net.ApiConstants;
+import customer.tcrj.com.zsproject.videoview.CpInfoVideoViewActivity;
 import customer.tcrj.com.zsproject.widget.CustomLoadMoreView;
 import customer.tcrj.com.zsproject.widget.selectDialog;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
@@ -117,11 +123,11 @@ public class XmIconActivity extends BaseActivity implements BaseQuickAdapter.OnI
         subordinate_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                projectInfo.ResultBean entity = (projectInfo.ResultBean) Dadapter1.getItem(position);
-                DayType = entity.getID();
-
-                pageNum = 1;
-                getData(pageNum);
+//                projectInfo.ResultBean entity = (projectInfo.ResultBean) Dadapter1.getItem(position);
+//                DayType = entity.getID();
+//
+//                pageNum = 1;
+//                getData(pageNum);
 
             }
 
@@ -134,6 +140,7 @@ public class XmIconActivity extends BaseActivity implements BaseQuickAdapter.OnI
 
     @Override
     protected void setView() {
+        EventBus.getDefault().register(this);
         mMyOkhttp = MyApp.getInstance().getMyOkHttp();
         data = (LoginInfo.ResultBean) ACache.get(this).getAsObject("userinfo");
         id = getIntent().getStringExtra("mlid");
@@ -338,7 +345,7 @@ public class XmIconActivity extends BaseActivity implements BaseQuickAdapter.OnI
 
     @Override
     protected void setData() {
-//        getData(1);
+        getData(1);
     }
 
     @OnClick({R.id.btnback,R.id.num})
@@ -508,7 +515,7 @@ public class XmIconActivity extends BaseActivity implements BaseQuickAdapter.OnI
             jsonObject.put("TableType", "1");
 
         } catch (JSONException e) {
-            e.printStackTrace();
+          e.printStackTrace();
         }
 
         mMyOkhttp.post()
@@ -537,11 +544,35 @@ public class XmIconActivity extends BaseActivity implements BaseQuickAdapter.OnI
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
+//        iconInfo.ResultBean item = (iconInfo.ResultBean) adapter.getItem(position);
+//        Bundle bundle = new Bundle();
+//        bundle.putSerializable("iconInfo",iconInfo);
+//        bundle.putInt("position",position);
+//        toClass(this,XmPhototViewActivity.class,bundle,REQUESTCODE);
+
+
         iconInfo.ResultBean item = (iconInfo.ResultBean) adapter.getItem(position);
         Bundle bundle = new Bundle();
         bundle.putSerializable("iconInfo",iconInfo);
+
         bundle.putInt("position",position);
-        toClass(this,XmPhototViewActivity.class,bundle,REQUESTCODE);
+
+        String fileType = item.getFileType();
+
+        if(".mp4".equals(fileType) || ".flv".equals(fileType)){
+//            bundle.putSerializable("videoInfo",item);
+//            toClass(this,VideoActivity.class,bundle);
+            Bundle videobundle = new Bundle();
+            videobundle.putString("cover",item.getFileUrl());
+            toClass(this,CpInfoVideoViewActivity.class,videobundle);
+
+        }else if(".jpeg".equals(fileType) || ".jpg".equals(fileType) || ".png".equals(fileType)){
+            toClass(this,XmPhototViewActivity.class,bundle,REQUESTCODE);
+        }else if(".pdf".equals(fileType)){
+
+            DownLoadFile.getInstance().initData(this, item.getFileUrl());
+        }
+
 
     }
 
@@ -579,6 +610,7 @@ public class XmIconActivity extends BaseActivity implements BaseQuickAdapter.OnI
                     Bundle bundle = new Bundle();
                     bundle.putString("mlid",id+"");
                     bundle.putString("ProID",ProID);
+                    bundle.putBoolean("isxm",true);
                     toClass(XmIconActivity.this,VideoRecorderActivity.class,bundle);
                     break;
                 default:
@@ -586,5 +618,24 @@ public class XmIconActivity extends BaseActivity implements BaseQuickAdapter.OnI
             }
         }
     };
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void Event(MessageEvent messageEvent) {
+
+        switch (messageEvent.getType()){
+
+            case 001:
+
+                    getData(1);
+
+                break;
+
+
+            default:
+                break;
+        }
+
+    }
 
 }

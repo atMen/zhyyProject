@@ -23,6 +23,7 @@ import com.jaeger.library.StatusBarUtil;
 import com.tsy.sdk.myokhttp.MyOkHttp;
 import com.tsy.sdk.myokhttp.response.GsonResponseHandler;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,13 +36,14 @@ import customer.tcrj.com.zsproject.R;
 import customer.tcrj.com.zsproject.Utils.ACache;
 import customer.tcrj.com.zsproject.Utils.DialogHelper;
 import customer.tcrj.com.zsproject.bean.LoginInfo;
+import customer.tcrj.com.zsproject.bean.MessageEvent;
 import customer.tcrj.com.zsproject.bean.bean;
 import customer.tcrj.com.zsproject.first.XmIconActivity;
 import customer.tcrj.com.zsproject.net.ApiConstants;
 
 
 public class VideoPlayerActivity extends AppCompatActivity implements View.OnClickListener {
-
+    private static final int EVENTYPE = 001;
     MyVideoView vvView;
     ImageView iv_play_video;
     ProgressBar progressBar;
@@ -57,6 +59,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
 
     private String ProID;
     private String id;
+    private boolean isxm;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
@@ -69,6 +72,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
         data = (LoginInfo.ResultBean) ACache.get(this).getAsObject("userinfo");
         mLoadingDialog = DialogHelper.getLoadingDialog(this);
 
+        isxm = getIntent().getBooleanExtra("isxm",false);
         id = getIntent().getStringExtra("mlid");
         ProID = getIntent().getStringExtra("ProID");
 
@@ -107,8 +111,6 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
 //
 //
 //        }
-
-
 
 
         initListener();
@@ -262,17 +264,27 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
         JSONObject jsonObject = new JSONObject();
 
         try {
-            jsonObject.put("fileStr", "sfz.mp4;"+result);
-            jsonObject.put("StaffID", data.getName());
-            jsonObject.put("SpotID", ProID);
-            jsonObject.put("SpotMenuID", id);
+
+
+            if(isxm){
+                jsonObject.put("fileStr", "sfz.mp4;"+result);
+                jsonObject.put("StaffID", data.getName());
+                jsonObject.put("DataID", ProID);
+                jsonObject.put("MenuID", id);
+                jsonObject.put("TableType", "1");
+            }else {
+                jsonObject.put("fileStr", "sfz.mp4;"+result);
+                jsonObject.put("StaffID", data.getName());
+                jsonObject.put("SpotID", ProID);
+                jsonObject.put("SpotMenuID", id);
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
         mMyOkhttp.post()
-                .url(ApiConstants.DW_ICON_PUCH_API)
+                .url(isxm ? ApiConstants.XM_ICON_PUCH_API : ApiConstants.DW_ICON_PUCH_API)
                 .jsonParams(jsonObject.toString())
                 .tag(this)
                 .enqueue(new GsonResponseHandler<bean>() {
@@ -290,6 +302,8 @@ public class VideoPlayerActivity extends AppCompatActivity implements View.OnCli
                         if(response.getStat() == 1){
                             //上传成功，发消息通知页面刷新数据
 
+                            EventBus.getDefault().post(new MessageEvent("上传成功",EVENTYPE));
+                            finish();
                             Log.e("TAG","上传成功");
                         }
                     }

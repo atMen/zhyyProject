@@ -41,6 +41,7 @@ public class VideoRecorderActivity extends AppCompatActivity {
 
     private String ProID;
     private String id;
+    private boolean isxm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,8 @@ public class VideoRecorderActivity extends AppCompatActivity {
 
         id = getIntent().getStringExtra("mlid");
         ProID = getIntent().getStringExtra("ProID");
+        isxm = getIntent().getBooleanExtra("isxm",false);
+
 
         initView(savedInstanceState);
     }
@@ -105,9 +108,9 @@ public class VideoRecorderActivity extends AppCompatActivity {
         if (null != surfaceView) {
             mediaUtils.setSurfaceView(surfaceView);
         }
-//        if (isBackCamera) {   // 开启后端摄像头
-//        } else {   // 开启前端摄像头
-//        }
+//      if (isBackCamera) {   // 开启后端摄像头
+//      } else {   // 开启前端摄像头
+//  }
         isBackCamera = !isBackCamera;
     }
 
@@ -271,6 +274,7 @@ public class VideoRecorderActivity extends AppCompatActivity {
             bundle.putString("path", path);
             bundle.putString("mlid",id+"");
             bundle.putString("ProID",ProID);
+            bundle.putBoolean("isxm",isxm);
             toClass(VideoRecorderActivity.this,VideoPlayerActivity.class,bundle);
             finish(); //结束当前的activity的生命周期
 //            send.stopAnim();

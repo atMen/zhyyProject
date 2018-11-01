@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mLoadingDialog = DialogHelper.getLoadingDialog(this);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         StatusBarUtil.setTranslucentForImageViewInFragment(MainActivity.this, 5,null);
+//        StatusBarUtil.setTranslucentForImageViewInFragment(this, 5,null);
         AppManager.getAppManager().addActivity(this);
         initview();
     }

@@ -381,6 +381,7 @@ public class CPinfoSxActivity extends BaseActivity implements BaseQuickAdapter.O
         int id = item.getID();
         Bundle bundle = new Bundle();
         bundle.putString("ProID",id+"");
+
 //        toClass(this,ListActivity.class,bundle);
         toClass(this,DwjcListInfoActivity.class,bundle);
 

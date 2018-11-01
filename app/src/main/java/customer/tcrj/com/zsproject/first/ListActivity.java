@@ -65,7 +65,7 @@ public class ListActivity extends BaseActivity implements BaseQuickAdapter.OnIte
     private int pageNum = 1;
     private List<MlListInfo.ResultBean> beanList;
     private String ProID;
-
+    boolean type;
 
     @Override
     protected int setLayout() {
@@ -76,11 +76,16 @@ public class ListActivity extends BaseActivity implements BaseQuickAdapter.OnIte
     protected void setView() {
         mMyOkhttp = MyApp.getInstance().getMyOkHttp();
         ProID = getIntent().getStringExtra("ProID");
+        type = getIntent().getBooleanExtra("type",false);
         initview();
     }
 
     private void initview() {
-        num.setVisibility(View.VISIBLE);
+
+        if(!type){
+            num.setVisibility(View.VISIBLE);
+        }
+
         txtTitle.setText("目录列表");
         mPtrFrameLayout.disableWhenHorizontalMove(true);
         mPtrFrameLayout.setPtrHandler(new PtrHandler() {
@@ -103,7 +108,7 @@ public class ListActivity extends BaseActivity implements BaseQuickAdapter.OnIte
         beanList = new ArrayList<>();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(ListActivity.this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setAdapter(detailAdapter = new mlAdapter(beanList, ListActivity.this));
+        mRecyclerView.setAdapter(detailAdapter = new mlAdapter(beanList, ListActivity.this,type));
         detailAdapter.setEnableLoadMore(false);
         detailAdapter.setOnItemClickListener(this);
         detailAdapter.setOnItemRemoveClickListener(this);
@@ -264,6 +269,7 @@ public class ListActivity extends BaseActivity implements BaseQuickAdapter.OnIte
         bundle.putString("mlid",id+"");
         bundle.putString("ProID",ProID);
         bundle.putString("MenuName",item.getMenuName());
+        bundle.putBoolean("type",type);
         toClass(this,IconActivity.class,bundle);
 //      Toast.makeText(this, item.getName(), Toast.LENGTH_SHORT).show();
 

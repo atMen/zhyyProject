@@ -74,7 +74,7 @@ public class PhototViewActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onPageSelected(int position) {
                 delepositing = position;
-                photo_num.setText((position+1)+"/"+result.size());
+//                photo_num.setText((position+1)+"/"+result.size());
             }
             @Override
             public void onPageScrollStateChanged(int state) {
@@ -98,7 +98,7 @@ public class PhototViewActivity extends AppCompatActivity implements View.OnClic
 
         @Override
         public int getCount() {
-            return result.size();
+            return 1;
         }
 
         @Override
@@ -110,13 +110,12 @@ public class PhototViewActivity extends AppCompatActivity implements View.OnClic
             PhotoView photoView = view.findViewById(R.id.photo_view);
 
 
-            ShowImageUtils.LoadImage(PhototViewActivity.this, result.get(position).getFileUrl(),photoView);
+            ShowImageUtils.LoadImage(PhototViewActivity.this, result.get(delepositing).getFileUrl(),photoView);
 //            ShowImageUtils.showImageView(PhototViewActivity.this,result.get(position).getFileUrl(),photoView,R.drawable.ic_placeholder);
 
 //            photoView.setImageResource(sDrawables[position]);
             // Now just add PhotoView to ViewPager and return it
             container.addView(view, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-
 
             return view;
         }
@@ -165,15 +164,21 @@ public class PhototViewActivity extends AppCompatActivity implements View.OnClic
                             int size = result.size();
                             Log.e("TAG","size"+size);
 
-                            if(size == 1){
+
                                 Intent intent = new Intent();
                                 setResult(RESULT_OK, intent);
                                 finish(); //结束当前的activity的生命周期
-                            }else {
-                                result.remove(delepositing);
-                                samplePagerAdapter.notifyDataSetChanged();
-                                photo_num.setText((delepositing+1)+"/"+result.size());
-                            }
+
+
+//                            if(size == 1){
+//                                Intent intent = new Intent();
+//                                setResult(RESULT_OK, intent);
+//                                finish(); //结束当前的activity的生命周期
+//                            }else {
+//                                result.remove(delepositing);
+//                                samplePagerAdapter.notifyDataSetChanged();
+//                                photo_num.setText((delepositing+1)+"/"+result.size());
+//                            }
                         }
                     }
                 });

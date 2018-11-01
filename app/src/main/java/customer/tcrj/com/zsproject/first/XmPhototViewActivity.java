@@ -97,7 +97,7 @@ public class XmPhototViewActivity extends AppCompatActivity implements View.OnCl
 
         @Override
         public int getCount() {
-            return result.size();
+            return 1;
         }
 
         @Override
@@ -109,7 +109,7 @@ public class XmPhototViewActivity extends AppCompatActivity implements View.OnCl
             PhotoView photoView = view.findViewById(R.id.photo_view);
 
 
-            ShowImageUtils.LoadImage(XmPhototViewActivity.this, result.get(position).getFileUrl(),photoView);
+            ShowImageUtils.LoadImage(XmPhototViewActivity.this, result.get(delepositing).getFileUrl(),photoView);
 //            ShowImageUtils.showImageView(PhototViewActivity.this,result.get(position).getFileUrl(),photoView,R.drawable.ic_placeholder);
 
 //            photoView.setImageResource(sDrawables[position]);
@@ -164,15 +164,15 @@ public class XmPhototViewActivity extends AppCompatActivity implements View.OnCl
                             int size = result.size();
                             Log.e("TAG","size"+size);
 
-                            if(size == 1){
+//                            if(size == 1){
                                 Intent intent = new Intent();
                                 setResult(RESULT_OK, intent);
                                 finish(); //结束当前的activity的生命周期
-                            }else {
-                                result.remove(delepositing);
-                                samplePagerAdapter.notifyDataSetChanged();
-                                photo_num.setText((delepositing+1)+"/"+result.size());
-                            }
+//                            }else {
+//                                result.remove(delepositing);
+//                                samplePagerAdapter.notifyDataSetChanged();
+//                                photo_num.setText((delepositing+1)+"/"+result.size());
+//                            }
                         }
                     }
                 });

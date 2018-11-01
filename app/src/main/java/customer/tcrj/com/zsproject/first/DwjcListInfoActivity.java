@@ -62,6 +62,7 @@ public class DwjcListInfoActivity extends BaseActivity {
     String proID;
     String SpotClassName;
 
+
     @Override
     protected int setLayout() {
         return R.layout.activity_dwjclist_info;
@@ -71,6 +72,7 @@ public class DwjcListInfoActivity extends BaseActivity {
     protected void setView() {
         mMyOkhttp = MyApp.getInstance().getMyOkHttp();
         proID = getIntent().getStringExtra("ProID");
+
         SpotClassName = getIntent().getStringExtra("SpotClassName");
         txtTitle.setText("点位基础信息详情");
     }
@@ -162,6 +164,7 @@ public class DwjcListInfoActivity extends BaseActivity {
             case R.id.btn_icon:
                 Bundle bundle1 = new Bundle();
                 bundle1.putString("ProID",proID+"");
+                bundle1.putBoolean("type",true);
                 toClass(this,ListActivity.class,bundle1);
                 break;
 

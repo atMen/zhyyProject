@@ -101,14 +101,22 @@
         <activity
             android:name=".first.SettingActivity"
             android:screenOrientation="portrait" />
+
         <activity android:name=".first.ArcGisActivity"
             android:screenOrientation="landscape"
-            ></activity>
+            />
 
         <activity android:name=".Media.VideoPlayerActivity"
             android:screenOrientation="portrait"/>
+
         <activity android:name=".Media.VideoRecorderActivity"
             android:screenOrientation="portrait"/>
+
+        <activity android:name=".Media.VideoActivity"/>
+        <activity
+            android:name=".videoview.CpInfoVideoViewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

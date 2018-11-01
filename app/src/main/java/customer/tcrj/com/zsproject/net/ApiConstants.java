@@ -15,7 +15,7 @@ public class ApiConstants {
      */
 
 //    private static final String URLROOT = "http://192.168.20.43:8788/api";
-    private static final String URLROOT = "http://192.168.20.43:8788/api";
+    private static final String URLROOT = "http://123.139.46.180:8014/Api";
     public static final String ImageURLROOT = "http://demo.tcrj.com.cn:8013/web.files";//回测
 
 //    private static final String URLROOT = "http://221.11.18.88:9999/";
@@ -171,8 +171,8 @@ public class ApiConstants {
    public static final String ARCGIS_URL_YAXQZHDL = "http://mierxya.tcrj.com.cn:8012/ArcGIS/rest/services/YAXQZHDLW/MapServer";
    public static final String ARCGIS_URL_CZWXLGJBZ = "http://mierxya.tcrj.com.cn:8012/ArcGIS/rest/services/CZWXLGJBZT/MapServer";
    public static final String ARCGIS_URL_ZHAFDWBZ = "http://mierxya.tcrj.com.cn:8012/ArcGIS/rest/services/ZHAFDWBZT/MapServer";
-   public static final String ARCGIS_URL_CZW = "http://mierxya.tcrj.com.cn:8012/ArcGIS/rest/services/CZW/MapServer";
-   public static final String ARCGIS_URL_ZHAF = "http://mierxya.tcrj.com.cn:8012/ArcGIS/rest/services/ZHAF/MapServer";
-   public static final String ARCGIS_URL_ZHJT = "http://mierxya.tcrj.com.cn:8012/ArcGIS/rest/services/ZHJT/MapServer";
+   public static final String ARCGIS_URL_CZW = "http://mierxya.tcrj.com.cn:8012/ArcGIS/rest/services/CZWJST/MapServer";
+   public static final String ARCGIS_URL_ZHAF = "http://mierxya.tcrj.com.cn:8012/ArcGIS/rest/services/ZHAFJSJDT/MapServer";
+   public static final String ARCGIS_URL_ZHJT = "http://mierxya.tcrj.com.cn:8012/ArcGIS/rest/services/ZHJTJSJDT/MapServer";
 
 }

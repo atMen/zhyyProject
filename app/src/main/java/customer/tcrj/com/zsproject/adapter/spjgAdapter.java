@@ -35,11 +35,10 @@ public class spjgAdapter extends BaseQuickAdapter<proListInfo.ResultBean.ItemsBe
 
         helper.setText(R.id.cpname, item.getSpotName());
 
-        helper.setText(R.id.cptime,item.getBasisCode());
 
         helper.setText(R.id.type, "基础分类："+item.getClassName());
         helper.setText(R.id.location, "基础位置："+item.getBasisLocation());
-        helper.setText(R.id.icon_num, "图片数量："+item.getImgCount()+" 张");
+        helper.setText(R.id.icon_num, "基础编号："+item.getBasisCode());
 
 
     }

@@ -22,11 +22,12 @@
         />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/photo_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="1/5"
+        android:text="1/1"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:layout_centerHorizontal="true"

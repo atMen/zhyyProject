@@ -29,6 +29,9 @@ import com.luck.picture.lib.tools.PictureFileUtils;
 import com.tsy.sdk.myokhttp.MyOkHttp;
 import com.tsy.sdk.myokhttp.response.GsonResponseHandler;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -40,21 +43,25 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import customer.tcrj.com.zsproject.Media.VideoActivity;
 import customer.tcrj.com.zsproject.Media.VideoRecorderActivity;
 import customer.tcrj.com.zsproject.MyApp;
 import customer.tcrj.com.zsproject.R;
 import customer.tcrj.com.zsproject.Utils.ACache;
+import customer.tcrj.com.zsproject.Utils.DownLoadFile;
 import customer.tcrj.com.zsproject.Utils.Utils;
 import customer.tcrj.com.zsproject.adapter.SpinnerTypeAdapter;
 import customer.tcrj.com.zsproject.adapter.ldjhAdapter;
 import customer.tcrj.com.zsproject.adapter.spjgAdapter;
 import customer.tcrj.com.zsproject.base.BaseActivity;
 import customer.tcrj.com.zsproject.bean.LoginInfo;
+import customer.tcrj.com.zsproject.bean.MessageEvent;
 import customer.tcrj.com.zsproject.bean.bean;
 import customer.tcrj.com.zsproject.bean.iconInfo;
 import customer.tcrj.com.zsproject.bean.proListInfo;
 import customer.tcrj.com.zsproject.bean.projectInfo;
 import customer.tcrj.com.zsproject.net.ApiConstants;
+import customer.tcrj.com.zsproject.videoview.CpInfoVideoViewActivity;
 import customer.tcrj.com.zsproject.widget.CustomLoadMoreView;
 import customer.tcrj.com.zsproject.widget.selectDialog;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
@@ -92,6 +99,8 @@ public class IconActivity extends BaseActivity implements BaseQuickAdapter.OnIte
     private String MenuName;
     LoginInfo.ResultBean data;
     private List<projectInfo.ResultBean> resultType;
+    private boolean type;
+
     @Override
     protected int setLayout() {
         return R.layout.activity_cpinfo;
@@ -104,6 +113,15 @@ public class IconActivity extends BaseActivity implements BaseQuickAdapter.OnIte
         id = getIntent().getStringExtra("mlid");
         ProID = getIntent().getStringExtra("ProID");
         MenuName = getIntent().getStringExtra("MenuName");
+
+        type = getIntent().getBooleanExtra("type",false);
+
+        if(type){
+            num.setVisibility(View.GONE);
+        }else {
+            num.setVisibility(View.VISIBLE);
+            num.setText("添加");
+        }
 
         initview();
         SpinnerLoad();
@@ -136,8 +154,7 @@ public class IconActivity extends BaseActivity implements BaseQuickAdapter.OnIte
     }
 
     private void initview() {
-        num.setVisibility(View.VISIBLE);
-        num.setText("添加");
+        EventBus.getDefault().register(this);
         txtTitle.setText(MenuName);
 
         mPtrFrameLayout.disableWhenHorizontalMove(true);
@@ -206,10 +223,10 @@ public class IconActivity extends BaseActivity implements BaseQuickAdapter.OnIte
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 projectInfo.ResultBean entity = (projectInfo.ResultBean) Dadapter1.getItem(position);
-                DayType = entity.getID();
-
-                pageNum = 1;
-                getData(pageNum);
+//                DayType = entity.getID();
+//
+//                pageNum = 1;
+//                getData(pageNum);
 
             }
 
@@ -219,7 +236,6 @@ public class IconActivity extends BaseActivity implements BaseQuickAdapter.OnIte
             }
         });
     }
-
 
     iconInfo iconInfo;
     //获取网络数据
@@ -346,7 +362,7 @@ public class IconActivity extends BaseActivity implements BaseQuickAdapter.OnIte
 
     @Override
     protected void setData() {
-//        getData(1);
+        getData(1);
     }
 
     @OnClick({R.id.btnback,R.id.num})
@@ -540,7 +556,6 @@ public class IconActivity extends BaseActivity implements BaseQuickAdapter.OnIte
                 });
     }
 
-
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
@@ -548,10 +563,21 @@ public class IconActivity extends BaseActivity implements BaseQuickAdapter.OnIte
         Bundle bundle = new Bundle();
         bundle.putSerializable("iconInfo",iconInfo);
         bundle.putInt("position",position);
-        toClass(this,PhototViewActivity.class,bundle,REQUESTCODE);
+        String fileType = item.getFileType();
 
+        if(".mp4".equals(fileType) || ".flv".equals(fileType)){
+//            bundle.putSerializable("videoInfo",item);
+//            toClass(this,VideoActivity.class,bundle);
+            Bundle videobundle = new Bundle();
+            videobundle.putString("cover",item.getFileUrl());
+            toClass(this,CpInfoVideoViewActivity.class,videobundle);
+
+        }else if(".jpeg".equals(fileType) || ".jpg".equals(fileType) || ".png".equals(fileType)){
+            toClass(this,PhototViewActivity.class,bundle,REQUESTCODE);
+        }else if(".pdf".equals(fileType)){
+            DownLoadFile.getInstance().initData(this, item.getFileUrl());
+        }
     }
-
 
     selectDialog dialog;
     private void showSelectDialog() {
@@ -577,13 +603,10 @@ public class IconActivity extends BaseActivity implements BaseQuickAdapter.OnIte
             dialog.dismiss();
             switch (view.getId()){
                 case R.id.pictrue :
-//                    Toast.makeText(mContext, "图片", Toast.LENGTH_SHORT).show();
                     addIcon();
                     break;
                 case R.id.video:
-//                    Toast.makeText(mContext, "视频", Toast.LENGTH_SHORT).show();
                     //视频录制
-
                     Bundle bundle = new Bundle();
                     bundle.putString("mlid",id+"");
                     bundle.putString("ProID",ProID);
@@ -595,6 +618,21 @@ public class IconActivity extends BaseActivity implements BaseQuickAdapter.OnIte
         }
     };
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void Event(MessageEvent messageEvent) {
 
+        switch (messageEvent.getType()){
+            case 001:
+                getData(1);
+                break;
+            default:
+                break;
+        }
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }

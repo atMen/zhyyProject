@@ -347,6 +347,7 @@
             android:textSize="@dimen/font_size_16" />
 
         <Button
+            android:visibility="gone"
             android:id="@+id/btn_icon"
             android:layout_width="0dp"
             android:layout_height="40dp"
